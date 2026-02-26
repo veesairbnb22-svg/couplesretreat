@@ -108,10 +108,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                <a href="/" class="flex-shrink-0 flex items-center cursor-pointer hover:opacity-90 transition-opacity">
                     <i data-lucide="heart-handshake" class="h-8 w-8 text-primary-600 mr-2"></i>
                     <span class="font-serif font-bold text-2xl text-primary-950 tracking-tight">Couples Retreat</span>
-                </div>
+                </a>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
@@ -554,13 +554,13 @@
                 <div>
                     <h4 class="text-lg font-bold mb-6 font-serif">Legal</h4>
                     <ul class="space-y-3">
-                        <li><a href="/terms-conditions/"
+                        <li><a href="#" onclick="openModal('termsModal'); return false;"
                                 class="text-slate-400 hover:text-primary-400 transition-colors text-sm">Terms &
                                 Conditions</a></li>
-                        <li><a href="/refund-cancellation-policy/"
+                        <li><a href="#" onclick="openModal('refundModal'); return false;"
                                 class="text-slate-400 hover:text-primary-400 transition-colors text-sm">Refund
                                 Policy</a></li>
-                        <li><a href="/refund-cancellation-policy/"
+                        <li><a href="#" onclick="openModal('cancellationModal'); return false;"
                                 class="text-slate-400 hover:text-primary-400 transition-colors text-sm">Cancellation
                                 Policy</a></li>
                     </ul>
@@ -599,10 +599,190 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        class="fixed bottom-8 right-8 bg-primary-600 text-white p-3 rounded-full shadow-lg hover:bg-primary-700 hover:scale-110 transition-all duration-300 opacity-0 invisible z-40">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
+    <!-- Modals -->
+    <!-- Terms & Conditions Modal -->
+    <div id="termsModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeModal('termsModal')"
+                class="sticky top-4 float-right mr-4 mt-4 text-slate-400 hover:text-primary-600 bg-slate-100 rounded-full p-2 transition-colors z-10 transition-transform hover:rotate-90">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="p-8 sm:p-12">
+                <h2 class="text-3xl font-serif font-bold text-slate-800 mb-6 text-primary-900 border-b pb-4">Terms &
+                    Conditions</h2>
+                <div
+                    class="prose prose-slate max-w-none prose-p:text-slate-600 prose-headings:text-slate-800 space-y-4 text-sm sm:text-base">
+                    <p class="font-bold text-primary-600">Effective Date: February 1st, 2026</p>
+                    <p>These Terms govern the use of the Couples Retreat website and services operated under VEES AIRBNB
+                        & Hospitality Solutions.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">1. Services</h3>
+                    <p>We provide curated short-term accommodation and premium hospitality experiences specifically
+                        designed for couples seeking to renew and strengthen their bonds during the Valentine season.
+                    </p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">2. Eligibility</h3>
+                    <p>Both guests must be at least 18 years old to book, register for the retreat, and check-in to our
+                        designated facilities.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">3. Booking & Payment</h3>
+                    <p>All bookings for the Couples Retreat must be paid in full via our secure online payment partner
+                        (Squadco). Your spot is strictly only secured upon successful payment confirmation.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">4. Check-In & Check-Out</h3>
+                    <p>Check-in time for the retreat accommodation is from <strong>2:00 PM</strong> on the preceding
+                        Friday. Check-out time is by <strong>12:00 PM (Noon)</strong>. Late checkouts may attract
+                        additional charges.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">5. Guest Responsibilities</h3>
+                    <p>Guests agree to maintain the property in excellent condition, avoid illegal activities, and
+                        respect property rules and the peace of other retreat attendees. Any severe violation may result
+                        in immediate termination of your stay without a refund.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">6. Damages and Liabilities</h3>
+                    <p>Guests are financially responsible for any damages to the property or provided amenities beyond
+                        normal wear and tear. Furthermore, VEES AIRBNB & Hospitality Solutions shall not be liable for
+                        the loss of personal belongings during your stay at Edmudian Court or during any of the retreat
+                        activities.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">7. Privacy</h3>
+                    <p>Personal information provided during registration is handled securely and used solely for
+                        managing your retreat experience and providing essential communications and receipts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refund Policy Modal -->
+    <div id="refundModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeModal('refundModal')"
+                class="sticky top-4 float-right mr-4 mt-4 text-slate-400 hover:text-primary-600 bg-slate-100 rounded-full p-2 transition-colors z-10 transition-transform hover:rotate-90">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="p-8 sm:p-12">
+                <h2 class="text-3xl font-serif font-bold text-slate-800 mb-6 text-primary-900 border-b pb-4">Refund
+                    Policy</h2>
+                <div
+                    class="prose prose-slate max-w-none prose-p:text-slate-600 prose-headings:text-slate-800 space-y-4 text-sm sm:text-base">
+                    <p class="font-bold text-primary-600">Effective Date: February 1st, 2026</p>
+                    <p>Couples Retreat is a premium hospitality and relational experience operated by VEES AIRBNB &
+                        Hospitality Solutions. Because our retreat involves booking exquisite accommodations, catering
+                        logistics, and securing facilitators well in advance, our refund framework is strictly
+                        structured.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">1. Refund Eligibility Timeline</h3>
+                    <ul class="list-disc pl-5 mt-2 space-y-4">
+                        <li><strong>72 hours or more before the event:</strong> Eligible for an <strong>80%
+                                refund</strong> of your total ticket price.</li>
+                        <li><strong>48–72 hours before the event:</strong> Eligible for a <strong>50% refund</strong>.
+                        </li>
+                        <li><strong>Less than 48 hours before the event:</strong> <strong>Non-refundable</strong>. At
+                            this stage, accommodations and logistics have been irrevocably finalized based on your
+                            attendance.</li>
+                    </ul>
+                    <h3 class="text-lg font-bold mt-8 mb-2">2. Processing Time</h3>
+                    <p>Approved refunds will be processed within <strong>5–10 business days</strong> directly to the
+                        original payment method used via Squadco.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">3. Force Majeure & Exceptions</h3>
+                    <p>Refunds or completely transferring your ticket to another couple may be considered in cases of
+                        severe, documented medical emergencies beyond the couple's control. These situations are
+                        strictly subject to management review.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancellation Policy Modal -->
+    <div id="cancellationModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeModal('cancellationModal')"
+                class="sticky top-4 float-right mr-4 mt-4 text-slate-400 hover:text-primary-600 bg-slate-100 rounded-full p-2 transition-colors z-10 transition-transform hover:rotate-90">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="p-8 sm:p-12">
+                <h2 class="text-3xl font-serif font-bold text-slate-800 mb-6 text-primary-900 border-b pb-4">
+                    Cancellation Policy</h2>
+                <div
+                    class="prose prose-slate max-w-none prose-p:text-slate-600 prose-headings:text-slate-800 space-y-4 text-sm sm:text-base">
+                    <p class="font-bold text-primary-600">Effective Date: February 1st, 2026</p>
+                    <p>This policy outlines the terms governing cancellations for the Couples Retreat organized by VEES
+                        AIRBNB & Hospitality Solutions.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">1. Booking Confirmation</h3>
+                    <p>Your spot at the retreat is only confirmed once payment has been successfully processed and your
+                        registration confirmation email has been received. Unpaid reservations will be automatically
+                        purged.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">2. How to Cancel</h3>
+                    <p>All cancellation requests must be explicitly sent to our official email channel at
+                        <strong>info@couplesretreat.co</strong>. Please include both your names and the primary phone
+                        number used during registration so we can track your ticket.
+                    </p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">3. No-Show Policy</h3>
+                    <p>Failure to arrive at Edmudian Court, Katampe Extension on the scheduled retreat date without
+                        prior written notice will result in the forfeiture of the full booking amount. No-shows are not
+                        eligible for a refund.</p>
+                    <h3 class="text-lg font-bold mt-8 mb-2">4. Event Modification by Organizers</h3>
+                    <p>In the highly unlikely event that VEES AIRBNB & Hospitality Solutions needs to postpone or
+                        significantly alter the Couples Retreat schedule, all registered couples will be offered the
+                        choice of a full 100% refund or a ticket transfer to the newly scheduled date.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
         // Initialize Icons
         lucide.createIcons();
+
+        // Modal Logic
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Small delay to allow display block to apply before animating opacity
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            // Wait for transition to finish before hiding
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = ''; // Restore scrolling
+            }, 300);
+        }
+
+        // Close modal when clicking outside of it (on the backdrop)
+        window.onclick = function (event) {
+            const modals = ['termsModal', 'refundModal', 'cancellationModal'];
+            modals.forEach(id => {
+                const modal = document.getElementById(id);
+                if (event.target === modal) {
+                    closeModal(id);
+                }
+            });
+        }
+
+        // Back to Top Button Logic
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
 
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
