@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fce7f3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #500724;
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            font-size: 28px;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            color: #fce7f3;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .h2 {
+            color: #500724;
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .button {
+            background-color: #500724;
+            color: #ffffff !important;
+            padding: 16px 32px;
+            text-decoration: none !important;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-block;
+            border: 2px solid #500724;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #ffffff !important;
+            color: #500724 !important;
+        }
+
+        .notice {
+            background-color: #fdf2f8;
+            border-left: 4px solid #db2777;
+            padding: 15px 20px;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #9d174d;
+        }
+
+        .footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Couples Retreat</h1>
+            <p>A Special Valentine Experience</p>
+        </div>
+        <div class="content">
+            <h2 class="h2">Thank You for Registering!</h2>
+            <p>Dear {{couple_name}},</p>
+            <p>We are thrilled to receive your registration for the upcoming Couples Retreat! You have taken a beautiful
+                step toward a weekend of healing, intimacy, and unending joy.</p>
+            <p><strong>To officially secure your spot and finalize your reservation, please complete your payment using
+                    the secure link below.</strong></p>
+
+            <div class="button-container">
+                <a href="https://pay.squadco.com/link/SGP5NV" class="button">Complete Payment Now</a>
+            </div>
+
+            <div class="notice">
+                <strong>Important Notice:</strong> If you were automatically redirected after submitting the form and
+                have <strong>already made your payment</strong>, please ignore this prompt. We will follow up shortly
+                with your receipt and onboarding details.
+            </div>
+
+            <p style="margin-top: 30px;">We can't wait to host you in Abuja.<br><br>Warm regards,<br><strong>VEES AIRBNB
+                    & Hospitality Solutions</strong></p>
+        </div>
+        <div class="footer">
+            &copy; 2026 Couples Retreat. All Rights Reserved.<br>
+            info@couplesretreat.co | (+234) 703 631 6083
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couples Retreat | A Special Valentine Experience</title>
+    <meta name="description"
+        content="A three-day quarterly event organized by VEES AIRBNB to heal marriages, build intimacy, and bring unending joy to homes.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN for development/demo) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "JGsXwp5920kv5OTsu",
+            });
+        })();
+    </script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            // ... (keep rest of config)
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            500: '#ec4899', // Pink
+                            600: '#db2777',
+                            800: '#9d174d',
+                            900: '#831843',
+                            950: '#500724', // Deep Burgundy
+                        },
+                        accent: '#fbbf24', // Warm gold
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(80, 7, 36, 0.7) 0%, rgba(80, 7, 36, 0.4) 100%);
+        }
+
+        /* Smooth reveal animation classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-primary-50 text-slate-800 font-sans antialiased selection:bg-primary-200 selection:text-primary-900 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i data-lucide="heart-handshake" class="h-8 w-8 text-primary-600 mr-2"></i>
+                    <span class="font-serif font-bold text-2xl text-primary-950 tracking-tight">Couples Retreat</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home"
+                        class="text-sm font-medium text-slate-700 hover:text-primary-600 transition-colors">Home</a>
+                    <a href="#about"
+                        class="text-sm font-medium text-slate-700 hover:text-primary-600 transition-colors">About</a>
+                    <a href="#details"
+                        class="text-sm font-medium text-slate-700 hover:text-primary-600 transition-colors">Details</a>
+                    <a href="#contact"
+                        class="text-sm font-medium text-slate-700 hover:text-primary-600 transition-colors">Contact</a>
+                    <a href="#register"
+                        class="px-6 py-2.5 rounded-full bg-primary-600 text-white font-medium text-sm hover:bg-primary-700 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all">Buy
+                        Ticket</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-primary-600 focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100">
+            <div class="px-4 pt-2 pb-6 space-y-1 shadow-xl">
+                <a href="#home"
+                    class="block px-3 py-3 rounded-md text-base font-medium text-slate-800 hover:bg-primary-50 hover:text-primary-600">Home</a>
+                <a href="#about"
+                    class="block px-3 py-3 rounded-md text-base font-medium text-slate-800 hover:bg-primary-50 hover:text-primary-600">About</a>
+                <a href="#details"
+                    class="block px-3 py-3 rounded-md text-base font-medium text-slate-800 hover:bg-primary-50 hover:text-primary-600">Details</a>
+                <a href="#contact"
+                    class="block px-3 py-3 rounded-md text-base font-medium text-slate-800 hover:bg-primary-50 hover:text-primary-600">Contact</a>
+                <a href="#register"
+                    class="block mt-4 text-center px-4 py-3 rounded-full bg-primary-600 text-white font-medium hover:bg-primary-700">Buy
+                    Ticket</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0 bg-primary-950">
+            <!-- Ensure this matches the image copied -->
+            <img id="hero-bg" src="./black_couple_sparkler_1772104161325.png" alt="Romantic black couple"
+                class="w-full h-full object-cover opacity-60 mix-blend-overlay">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+
+        <!-- Animated Blobs -->
+        <div
+            class="absolute top-0 -left-4 w-72 h-72 bg-primary-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob z-0">
+        </div>
+        <div
+            class="absolute top-0 -right-4 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob animation-delay-2000 z-0">
+        </div>
+        <div
+            class="absolute -bottom-8 left-20 w-72 h-72 bg-primary-800 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob animation-delay-4000 z-0">
+        </div>
+
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mt-12">
+            <span
+                class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-semibold tracking-wider mb-6 border border-white/30 uppercase">
+                March 20 - 21, 2026
+            </span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                A Special Valentine Experience <br /> <span class="italic text-primary-100">for Couples</span>
+            </h1>
+            <p class="text-lg md:text-xl text-primary-50 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+                Escape the routine and reignite the spark. Rebuild intimacy, strengthen communication, and experience
+                renewed love and peace.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#register"
+                    class="px-8 py-4 rounded-full bg-white text-primary-900 font-bold text-lg hover:bg-primary-50 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all w-full sm:w-auto text-center group flex items-center justify-center">
+                    Reserve Your Spot
+                    <i data-lucide="arrow-right"
+                        class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#about"
+                    class="px-8 py-4 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/30 font-medium text-lg hover:bg-black/30 transition-all w-full sm:w-auto text-center">
+                    Learn More
+                </a>
+            </div>
+
+            <!-- Countdown Timer placeholder -->
+            <div
+                class="mt-16 grid grid-cols-4 gap-4 max-w-lg mx-auto bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-2xl">
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-serif font-bold text-white" id="days">00</div>
+                    <div class="text-xs text-primary-100 uppercase tracking-widest mt-1">Days</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-serif font-bold text-white" id="hours">00</div>
+                    <div class="text-xs text-primary-100 uppercase tracking-widest mt-1">Hours</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-serif font-bold text-white" id="minutes">00</div>
+                    <div class="text-xs text-primary-100 uppercase tracking-widest mt-1">Mins</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-serif font-bold text-white" id="seconds">00</div>
+                    <div class="text-xs text-primary-100 uppercase tracking-widest mt-1">Secs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <a href="#about"
+            class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/70 hover:text-white animate-bounce">
+            <i data-lucide="chevron-down" class="h-8 w-8"></i>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-primary-100 rounded-full z-0"></div>
+                    <img id="about-img" src="./black_couple_laughing_2_1772104747464.png"
+                        alt="Happy black couple laughing"
+                        class="rounded-2xl shadow-2xl relative z-10 w-full object-cover h-[600px]">
+                    <div
+                        class="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-xl z-20 hidden md:block border border-primary-50">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-primary-100 p-3 rounded-full">
+                                <i data-lucide="sun" class="h-8 w-8 text-primary-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 font-medium">Organized By</p>
+                                <p class="font-bold text-slate-800">VEES AIRBNB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <h2 class="text-sm font-bold text-primary-600 uppercase tracking-widest mb-3">The Intent</h2>
+                    <h3 class="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-6 leading-tight">
+                        Why should you attend Couples Retreat?
+                    </h3>
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        Marriage is a journey, and every journey requires moments of rest, reflection, and renewal. The
+                        Couples Retreat is a three-day, quarterly experience intentionally created to help couples heal,
+                        reconnect, and grow stronger together.
+                    </p>
+                    <p class="text-lg text-slate-600 mb-10 leading-relaxed">
+                        This retreat provides a safe and supportive environment where couples can confront unresolved
+                        issues, heal emotional wounds, and receive answers to long-held questions that often go unspoken
+                        in marriages.
+                    </p>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="flex gap-4">
+                            <div class="mt-1 bg-primary-50 p-2 rounded-lg h-fit">
+                                <i data-lucide="flame" class="h-6 w-6 text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">Rebuild Intimacy</h4>
+                                <p class="text-sm text-slate-600">Emotional, spiritual, and physical reconnection.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="mt-1 bg-primary-50 p-2 rounded-lg h-fit">
+                                <i data-lucide="message-circle-heart" class="h-6 w-6 text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">Strengthen Communication</h4>
+                                <p class="text-sm text-slate-600">Foster deeper mutual understanding.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="mt-1 bg-primary-50 p-2 rounded-lg h-fit">
+                                <i data-lucide="activity" class="h-6 w-6 text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">Revive Marriages</h4>
+                                <p class="text-sm text-slate-600">Heal strained or disconnected relationships.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="mt-1 bg-primary-50 p-2 rounded-lg h-fit">
+                                <i data-lucide="smile" class="h-6 w-6 text-primary-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">Renewed Joy</h4>
+                                <p class="text-sm text-slate-600">Experience peace and unending joy at home.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Details Section -->
+    <section id="details" class="py-24 bg-primary-950 text-white relative overflow-hidden">
+        <!-- Abstract background shapes -->
+        <div
+            class="absolute top-0 right-0 w-1/2 h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdib3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMSI+PHBhdGggZD0iTTM2IDM0djIwaC0ydi0yMGgtMjB2LTJoMjB2LTIwaDJ2MjBoMjB2MmgtMjB6Ii8+PC9nPjwvZz48L3N2Zz4=')]">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-sm font-bold text-primary-300 uppercase tracking-widest mb-3">Event Details</h2>
+                <h3 class="text-4xl md:text-5xl font-serif font-bold mb-6">Join Us in Abuja</h3>
+                <p class="text-primary-100 text-lg">Mark your calendars for an unforgettable weekend.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Time Box -->
+                <div
+                    class="bg-white/10 backdrop-blur border border-white/20 p-8 rounded-2xl reveal hover:bg-white/15 transition-colors">
+                    <div
+                        class="bg-primary-500/20 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-primary-300">
+                        <i data-lucide="clock" class="h-8 w-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-serif font-bold mb-4">Programme</h4>
+                    <ul class="space-y-4 text-primary-100">
+                        <li class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Start Time:</span> <span class="font-bold text-white">10:00 AM</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/10 pb-2">
+                            <span>End Time:</span> <span class="font-bold text-white">4:00 PM</span>
+                        </li>
+                        <li class="flex justify-between pb-2">
+                            <span>Break:</span> <span class="font-bold text-white">1 hour</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Location Box -->
+                <div
+                    class="bg-white/10 backdrop-blur border border-white/20 p-8 rounded-2xl reveal hover:bg-white/15 transition-colors delay-100 relative group">
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary-400 to-accent rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="bg-primary-500/20 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-primary-300">
+                        <i data-lucide="map-pin" class="h-8 w-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-serif font-bold mb-4">Venue</h4>
+                    <p class="font-bold text-white text-lg mb-2">Edmudian Court</p>
+                    <p class="text-primary-100 mb-6 line-clamp-2">20 Jubril Aminu Crescent, Katampe Extension, Abuja-FCT
+                    </p>
+                    <a href="https://maps.google.com/?q=Edmudian+Court,+Katampe+Extension,+Abuja" target="_blank"
+                        class="text-primary-300 font-medium hover:text-white flex items-center transition-colors">
+                        View on Map <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                    </a>
+                </div>
+
+                <!-- Contact Box -->
+                <div
+                    class="bg-white/10 backdrop-blur border border-white/20 p-8 rounded-2xl reveal hover:bg-white/15 transition-colors delay-200">
+                    <div
+                        class="bg-primary-500/20 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-primary-300">
+                        <i data-lucide="mail" class="h-8 w-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-serif font-bold mb-4">Inquiries</h4>
+                    <ul class="space-y-4 text-primary-100">
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="h-5 w-5 mr-3 text-primary-400"></i>
+                            <a href="tel:+2347036316083" class="hover:text-white transition-colors">(+234) 703 631
+                                6083</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="at-sign" class="h-5 w-5 mr-3 text-primary-400"></i>
+                            <a href="mailto:info@couplesretreat.co"
+                                class="hover:text-white transition-colors">info@couplesretreat.co</a>
+                        </li>
+                        <li class="mt-6">
+                            <a href="https://wa.me/2347036316083"
+                                class="inline-flex items-center justify-center w-full py-3 px-4 bg-green-600 hover:bg-green-500 text-white rounded-lg font-medium transition-colors">
+                                <i data-lucide="message-circle" class="h-5 w-5 mr-2"></i> WhatsApp Us
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="py-24 bg-primary-50 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden reveal">
+                <div class="grid md:grid-cols-5">
+                    <!-- Form side -->
+                    <div class="p-8 md:p-12 md:col-span-3">
+                        <h3 class="text-3xl font-serif font-bold text-slate-900 mb-2">Secure Your Spot</h3>
+                        <p class="text-slate-500 mb-8">Fill out the details below to register for the Couples Retreat.
+                            You will be redirected to payment securely.</p>
+
+                        <form id="registration-form" class="space-y-6" onsubmit="handleFormSubmit(event)">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="husbandName"
+                                        class="block text-sm font-medium text-slate-700 mb-1">Husband's Name *</label>
+                                    <input type="text" id="husbandName" name="husband_name" required
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-slate-50">
+                                </div>
+                                <div>
+                                    <label for="wifeName" class="block text-sm font-medium text-slate-700 mb-1">Wife's
+                                        Name *</label>
+                                    <input type="text" id="wifeName" name="wife_name" required
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-slate-50">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email Address
+                                    *</label>
+                                <input type="email" id="email" name="user_email" required
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-slate-50">
+                            </div>
+
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-slate-700 mb-1">Phone Number
+                                    *</label>
+                                <input type="tel" id="phone" name="phone_number" required
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-slate-50">
+                            </div>
+
+                            <button type="submit"
+                                class="w-full py-4 px-6 rounded-xl bg-primary-600 text-white font-bold text-lg hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 transition-all flex justify-center items-center group shadow-lg">
+                                Continue to Payment
+                                <i data-lucide="lock"
+                                    class="ml-2 h-5 w-5 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                            </button>
+                            <p class="text-xs text-center text-slate-400 mt-4 flex items-center justify-center">
+                                <i data-lucide="shield-check" class="h-4 w-4 mr-1"></i> Secure payment via SquadCo
+                            </p>
+                        </form>
+                    </div>
+
+                    <!-- Info side -->
+                    <div class="bg-primary-900 text-white p-8 md:p-12 md:col-span-2 relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 text-primary-800 opacity-50">
+                            <i data-lucide="heart" class="w-64 h-64"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <h4 class="text-xl font-serif font-bold mb-6">What's Included?</h4>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle-2"
+                                        class="h-6 w-6 text-primary-400 mr-3 flex-shrink-0 mt-0.5"></i>
+                                    <span class="text-sm text-primary-100">Full 2-day access</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle-2"
+                                        class="h-6 w-6 text-primary-400 mr-3 flex-shrink-0 mt-0.5"></i>
+                                    <span class="text-sm text-primary-100">Accommodation for 2 nights</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle-2"
+                                        class="h-6 w-6 text-primary-400 mr-3 flex-shrink-0 mt-0.5"></i>
+                                    <span class="text-sm text-primary-100">Transportation from hotel to venue and
+                                        back</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle-2"
+                                        class="h-6 w-6 text-primary-400 mr-3 flex-shrink-0 mt-0.5"></i>
+                                    <span class="text-sm text-primary-100">Learning materials</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle-2"
+                                        class="h-6 w-6 text-primary-400 mr-3 flex-shrink-0 mt-0.5"></i>
+                                    <span class="text-sm text-primary-100">Refreshments</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle-2"
+                                        class="h-6 w-6 text-primary-400 mr-3 flex-shrink-0 mt-0.5"></i>
+                                    <span class="text-sm text-primary-100">One-on-one sessions</span>
+                                </li>
+                            </ul>
+
+                            <div class="mt-12 p-4 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+                                <p class="text-sm italic text-primary-100">"This retreat changed our lives completely.
+                                    Best decision we ever made."</p>
+                                <p class="text-xs text-primary-300 mt-2 font-bold">— Past Attendee</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-slate-900 border-t border-slate-800 text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center mb-6">
+                        <i data-lucide="heart-handshake" class="h-8 w-8 text-primary-500 mr-2"></i>
+                        <span class="font-serif font-bold text-2xl tracking-tight">Couples Retreat</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Healing marriages, building intimacy, and answering long questions in the heart of couples with
+                        the aim of reviving homes.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://web.facebook.com/profile.php?id=100088500250837" target="_blank"
+                            class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="https://ng.linkedin.com/in/ambassador-veronica-mbalaso-7120aa13a" target="_blank"
+                            class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i data-lucide="linkedin" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 font-serif">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home"
+                                class="text-slate-400 hover:text-primary-400 transition-colors text-sm">Home</a></li>
+                        <li><a href="#about"
+                                class="text-slate-400 hover:text-primary-400 transition-colors text-sm">About</a></li>
+                        <li><a href="#register"
+                                class="text-slate-400 hover:text-primary-400 transition-colors text-sm">Register</a>
+                        </li>
+                        <li><a href="#contact"
+                                class="text-slate-400 hover:text-primary-400 transition-colors text-sm">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Policies -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 font-serif">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/terms-conditions/"
+                                class="text-slate-400 hover:text-primary-400 transition-colors text-sm">Terms &
+                                Conditions</a></li>
+                        <li><a href="/refund-cancellation-policy/"
+                                class="text-slate-400 hover:text-primary-400 transition-colors text-sm">Refund
+                                Policy</a></li>
+                        <li><a href="/refund-cancellation-policy/"
+                                class="text-slate-400 hover:text-primary-400 transition-colors text-sm">Cancellation
+                                Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 font-serif">Office</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="h-5 w-5 text-primary-500 mr-3 flex-shrink-0 mt-0.5"></i>
+                            <span class="text-slate-400 text-sm">25 Massenya St, Wuse, Abuja 900110, FCT</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="h-5 w-5 text-primary-500 mr-3 flex-shrink-0"></i>
+                            <span class="text-slate-400 text-sm">(+234) 703 631 6083</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="mail" class="h-5 w-5 text-primary-500 mr-3 flex-shrink-0"></i>
+                            <span class="text-slate-400 text-sm">info@couplesretreat.co</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div
+                class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+                <p>&copy; 2026 Couples Retreat. All Rights Reserved.</p>
+                <p class="mt-2 md:mt-0 flex items-center">
+                    Powered by VEES AIRBNB & Hospitality Solutions
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-slate-600 mx-2"></span>
+                    BN: 6913957
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // Scroll Reveal Animation Builder
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger initially
+
+        // Countdown Timer
+        // Target: March 20, 2026 10:00 AM
+        const targetDate = new Date('March 20, 2026 10:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Form Submit
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="loader-2" class="animate-spin h-5 w-5 mr-2"></i> Processing...';
+            lucide.createIcons();
+            btn.disabled = true;
+
+            // Gather form data
+            const husbandName = document.getElementById('husbandName').value;
+            const wifeName = document.getElementById('wifeName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            // Prepare template parameters matching exactly what you created in EmailJS
+            const templateParams = {
+                husband_name: husbandName,
+                wife_name: wifeName,
+                user_email: email,
+                phone_number: phone,
+                couple_name: husbandName + " & " + wifeName,
+                reply_to: email, // Fallback for email services
+                to_email: email // Explicit target for the attendee template
+            };
+
+            // 1. Send Admin Email (Template ID: template_swyuft4)
+            // We do not await this, so a failure here won't stop the customer from paying
+            emailjs.send('service_6hxvxd7', 'template_swyuft4', templateParams)
+                .catch(error => console.error('Admin Email Failed...', error));
+
+            // 2. Send Attendee Email (Template ID: template_96jrseq)
+            emailjs.send('service_6hxvxd7', 'template_96jrseq', templateParams)
+                .catch(error => console.error('Attendee Email Failed...', error));
+
+            // 3. Show Success Message & Redirect safely
+            btn.innerHTML = '<i data-lucide="check-circle" class="h-5 w-5 mr-2"></i> Details Saved! Redirecting...';
+            btn.classList.add('bg-green-600', 'hover:bg-green-700');
+            btn.classList.remove('bg-primary-600', 'hover:bg-primary-700');
+            lucide.createIcons();
+
+            setTimeout(() => {
+                window.location.href = 'https://pay.squadco.com/link/SGP5NV';
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>
